@@ -46,7 +46,10 @@ def scan(
         scanner.log = debug_printer
 
     for p in paths:
-        scanner.scan(p)
+        if not (os.path.isdir(p) or os.path.ismount(p)):
+            print("Not a directory or mount: {}".format(p), file=sys.stderr)
+        else:
+            scanner.scan(p)
 
 
 class CLIError(Exception):
