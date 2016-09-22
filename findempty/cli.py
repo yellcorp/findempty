@@ -73,7 +73,7 @@ def run(argv=None):
         else:
             ignore_func, preserve_func = findempty.config.load(config_path)
 
-    scan(args.paths, ignore_func, preserve_func, args.delete, line_delimiter, args.verbose, args.debug)
+    return scan(args.paths, ignore_func, preserve_func, args.delete, line_delimiter, args.verbose, args.debug)
 
 
 def main():
