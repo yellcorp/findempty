@@ -57,4 +57,4 @@ optional arguments:
   --no-env              Do not read environment variables when searching for a
                         config path.
   --show-default-config
-                        Prints the default config to stdout.
+                        Prints the default config to stdout and exit.

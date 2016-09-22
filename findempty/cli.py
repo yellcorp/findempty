@@ -77,7 +77,7 @@ def get_arg_parser():
     p.add_argument("--show-default-config",
         action="store_true",
         default=False,
-        help="""Prints the default config to stdout."""
+        help="""Prints the default config to stdout and exit."""
     )
 
     return p
