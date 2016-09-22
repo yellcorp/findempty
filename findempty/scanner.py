@@ -59,5 +59,6 @@ class EmptyFolderScanner(object):
             is_dir = child.is_dir()
             if is_dir:
                 self._delete_walk(child)
-            self.handle_empty_descendant(child, is_dir)
+            else:
+                self.handle_empty_descendant(child, False)
         self.handle_empty_descendant(root, True)
