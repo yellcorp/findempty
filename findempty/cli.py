@@ -31,6 +31,9 @@ def scan(
     def debug_printer(text):
         print(text, file=sys.stderr)
 
+    if not delete and verbose < 1:
+        verbose = 1
+
     if verbose >= 2:
         scanner.handle_empty_descendant.append(printer)
     elif verbose == 1:
