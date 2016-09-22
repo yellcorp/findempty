@@ -74,6 +74,12 @@ def get_arg_parser():
         path."""
     )
 
+    p.add_argument("--show-default-config",
+        action="store_true",
+        default=False,
+        help="""Prints the default config to stdout."""
+    )
+
     return p
 
 
@@ -129,6 +135,11 @@ class CLIError(Exception):
 
 def run(argv=None):
     args = get_arg_parser().parse_args(argv)
+
+    if args.show_default_config:
+        with open(findempty.config.get_default_path(), "r") as config_stream:
+            sys.stdout.write(config_stream.read())
+        return
 
     if len(args.paths) == 0:
         raise CLIError("No paths specified.")
