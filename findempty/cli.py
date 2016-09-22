@@ -42,8 +42,15 @@ def scan(
         scanner.scan(p)
 
 
+class CLIError(Exception):
+    pass
+
+
 def run(argv=None):
     args = get_arg_parser().parse_args(argv)
+
+    if len(args.paths) == 0:
+        raise CLIError("No paths specified.")
 
     ignore_func = None
     preserve_func = None
@@ -54,8 +61,7 @@ def run(argv=None):
 
     if args.no_config:
         if args.config:
-            # raise error: gotta decide what you want brah
-            pass
+            raise CLIError("Both --config and --no-config options given.")
     else:
         config_path = args.config
 
@@ -66,9 +72,6 @@ def run(argv=None):
             ignore_func, preserve_func = findempty.config.load_default()
         else:
             ignore_func, preserve_func = findempty.config.load(config_path)
-
-    if len(args.folders) == 0:
-        print("No folders specified.", file=sys.stderr)
 
     scan(args.paths, ignore_func, preserve_func, args.delete, line_delimiter, args.verbose, args.debug)
 
