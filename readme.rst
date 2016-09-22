@@ -27,19 +27,19 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -c PATH, --config PATH
-                        Read configuration from PATH. A configuration file can
+                        Read configuration from ``PATH``. A configuration file can
                         specify names to ignore and/or preserve, optionally
                         using wildcards. If a file or folder matches an
-                        `ignore` name, it will not be counted when considering
+                        ``ignore`` name, it will not be counted when considering
                         whether a folder is empty. Thus a folder which only
                         contains ignorable files or folders will be considered
                         empty. Ignored folders will not have their contents
-                        examined. If a folder matches a `preserve` name, it
+                        examined. If a folder matches a ``preserve`` name, it
                         will not be deleted even if it would be considered
                         empty. Preserved folders will also not have their
-                        contents examined. Note the concept of `preserve` only
+                        contents examined. Note the concept of ``preserve`` only
                         applies to folders. If this option is not provided,
-                        the environment variable FINDEMPTY_CONFIG, if present,
+                        the environment variable ``FINDEMPTY_CONFIG``, if present,
                         will be used, and failing that, a default config will
                         be used.
   -d, --delete          Delete empty folders as they are discovered. This will
@@ -49,7 +49,7 @@ optional arguments:
                         specified. Specify twice to also print the ignored
                         contents of empty folders, if any.
   --debug               Print debugging information to stderr.
-  -0, --print0          Use null characters (\0) instead of newlines (\n) when
+  -0, --print0          Use null characters (\\0) instead of newlines (\\n) when
                         printing names via the -v/--verbose option.
   --no-config           Suppress configuration loading entirely. No files or
                         folders will be ignored, and no folders will be
