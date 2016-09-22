@@ -43,7 +43,7 @@ def get_arg_parser():
     p.add_argument("-v", "--verbose",
         action="count",
         help="""Prints the paths of empty folders as they are discovered. This
-        is the default unless --delete/-d is specified. Specify twice to also
+        is the default unless -d/--delete is specified. Specify twice to also
         print the ignored contents of empty folders, if any."""
     )
 
