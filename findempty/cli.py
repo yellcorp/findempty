@@ -24,8 +24,12 @@ def scan(
 ):
     scanner = findempty.scanner.EmptyFolderScanner(ignore_func, preserve_func)
 
-    printer = functools.partial(print, file=sys.stdout, end=line_delimiter)
-    stderr_printer = functools.partial(print, file=sys.stderr)
+    def printer(*args):
+        zero_or_one_arg = args[:1]
+        print(*zero_or_one_arg, end=line_delimiter)
+
+    def debug_printer(text):
+        print(text, file=sys.stderr)
 
     if verbose >= 2:
         scanner.handle_empty_descendant.append(printer)
@@ -36,7 +40,7 @@ def scan(
         scanner.handle_empty_descendant.append(deleter)
 
     if debug:
-        scanner.log = stderr_printer
+        scanner.log = debug_printer
 
     for p in paths:
         scanner.scan(p)
