@@ -3,7 +3,7 @@ Library and command-line utilities to find and optionally remove empty folders
 in a filesystem tree.
 """
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 
 
 import findempty.cli as cli
