@@ -11,7 +11,7 @@ CONFIG_PATH_ENVIRONMENT_KEY = "FINDEMPTY_CONFIG"
 def get_arg_parser():
     p = ArgumentParser(description="Find empty folders")
 
-    p.add_argument("folders", nargs="*",
+    p.add_argument("paths", nargs="*",
         metavar="FOLDERS",
         help="""Root folders to check for emptiness.""")
 
