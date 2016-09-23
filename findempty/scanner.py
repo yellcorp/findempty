@@ -7,7 +7,7 @@ def never(_):
     return False
 
 
-def nothing():
+def nothing(_):
     pass
 
 
