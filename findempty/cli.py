@@ -92,10 +92,20 @@ def get_arg_parser():
 
 
 def deleter(path_obj, is_dir):
-    if is_dir:
-        path_obj.rmdir()
-    else:
-        path_obj.unlink()
+    try:
+        if is_dir:
+            path_obj.rmdir()
+        else:
+            path_obj.unlink()
+    except OSError as error:
+        print(
+            "{!s}: {} {!s}".format(
+                path_obj,
+                error.__class__.__name__,
+                error
+            ),
+            file=sys.stderr
+        )
 
 
 def scan(
