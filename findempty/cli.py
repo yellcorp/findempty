@@ -14,7 +14,8 @@ def get_arg_parser():
 
     p.add_argument("paths", nargs="*",
         metavar="FOLDERS",
-        help="""Root folders to check for emptiness.""")
+        help="""Root folders to check for emptiness."""
+    )
 
     p.add_argument("-c", "--config",
         metavar="PATH",
