@@ -1,4 +1,5 @@
 import findempty.config
+from findempty import __version__
 
 from argparse import ArgumentParser
 import os.path
@@ -79,6 +80,11 @@ def get_arg_parser():
         action="store_true",
         default=False,
         help="""Prints the default config to stdout and exit."""
+    )
+
+    p.add_argument("--version",
+        action="version",
+        version="%(prog)s " + __version__
     )
 
     return p
