@@ -91,21 +91,12 @@ def get_arg_parser():
     return p
 
 
-def deleter(path_obj, is_dir):
-    try:
-        if is_dir:
-            path_obj.rmdir()
-        else:
-            path_obj.unlink()
-    except OSError as error:
-        print(
-            "{!s}: {} {!s}".format(
-                path_obj,
-                error.__class__.__name__,
-                error
-            ),
-            file=sys.stderr
-        )
+def format_error(error):
+    return "{} {!s}".format(error.__class__.__name__, error)
+
+
+def format_path_error(path, error):
+    return "{!s}: {}".format(path, error)
 
 
 def scan(
@@ -118,6 +109,12 @@ def scan(
     debug=False
 ):
     scanner = findempty.scanner.EmptyFolderScanner(ignore_func, preserve_func)
+    success = True
+
+    def handle_error(path, error):
+        nonlocal success
+        success = False
+        print(format_path_error(path, error))
 
     def printer(*args):
         zero_or_one_arg = args[:1]
@@ -135,16 +132,27 @@ def scan(
         scanner.handle_empty_root.append(printer)
 
     if delete:
+        def deleter(path_obj, is_dir):
+            try:
+                if is_dir:
+                    path_obj.rmdir()
+                else:
+                    path_obj.unlink()
+            except OSError as os_error:
+                handle_error(path_obj, os_error)
+
         scanner.handle_empty_descendant.append(deleter)
 
     if debug:
         scanner.log = debug_printer
 
-    for p in paths:
-        if not (os.path.isdir(p) or os.path.ismount(p)):
-            print("Not a directory or mount: {}".format(p), file=sys.stderr)
-        else:
-            scanner.scan(p)
+    for path in paths:
+        try:
+            scanner.scan(path)
+        except OSError as os_error:
+            handle_error(path, os_error)
+
+    return success
 
 
 class CLIError(Exception):
@@ -183,7 +191,19 @@ def run(argv=None):
         else:
             ignore_func, preserve_func = findempty.config.load(config_path)
 
-    return scan(args.paths, ignore_func, preserve_func, args.delete, line_delimiter, args.verbose, args.debug)
+    success = scan(
+        args.paths,
+        ignore_func,
+        preserve_func,
+        args.delete,
+        line_delimiter,
+        args.verbose,
+        args.debug
+    )
+
+    if success:
+        return 0
+    return 1
 
 
 def main():
