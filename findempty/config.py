@@ -2,7 +2,6 @@ import os.path
 
 
 __all__ = [
-    "MatchFunctions",
     "ConfigError",
     "any_glob_matcher",
     "load_lines", "loads", "load",

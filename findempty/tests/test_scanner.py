@@ -4,7 +4,6 @@ import findempty.cli as cli
 import findempty.config as config
 
 import shutil
-import sys
 
 
 WORK_PATH = "test-tree-findempty"
