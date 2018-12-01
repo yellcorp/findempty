@@ -96,7 +96,7 @@ class PresenceMismatch(object):
         )
 
     def __repr__(self):
-        return "ExistenceMismatch({!r}, {!r})".format(
+        return "PresenceMismatch({!r}, {!r})".format(
             self.name, self.present_in_index
         )
 
