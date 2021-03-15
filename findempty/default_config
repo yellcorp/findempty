@@ -2,6 +2,7 @@
 .DS_Store
 ._*
 thumbs.db
+thumbs.db:encryptable
 desktop.ini
 preview.pix
 .BridgeSort
