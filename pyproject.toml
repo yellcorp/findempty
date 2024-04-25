@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "findempty"
+version = "0.0.8"
+description = "Library and command-line utilities to find and optionally remove empty folders in a filesystem tree."
+license = "MIT"
+authors = ["Jim Boswell <jimb@yellcorp.org>"]
+readme = "readme.rst"
+repository = "https://github.com/yellcorp/findempty"
+classifiers = [
+    'Environment :: Console',
+    'Intended Audience :: Developers',
+    'Intended Audience :: End Users/Desktop',
+    'Operating System :: POSIX :: Linux',
+    'Operating System :: MacOS :: MacOS X',
+    'Topic :: Utilities'
+]
+include = ["findempty/default_config"]
+
+[tool.poetry.scripts]
+findempty = "findempty.cli:main"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
